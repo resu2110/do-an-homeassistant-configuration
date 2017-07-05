@@ -1,0 +1,43 @@
+  - platform: mqtt
+    state_topic: "room/light-sensing-mid-room"
+    name: "light-mid-room"
+
+  - platform: mqtt
+    state_topic: "room/temperature-sensing-mid-room"
+    name: "temperature-mid-room"
+    unit_of_measurement: "C"
+
+  - platform: mqtt
+    state_topic: "room/humidity-sensing-mid-room"
+    name: "humidity-mid-room"
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "outside/light-sensing-front-door"
+    name: "light-front-door"
+    unit_of_measurement: "Dark"
+
+  - platform: mqtt
+    state_topic: "outside/temperature-sensing-front-door"
+    name: "temperature-front-door"
+    unit_of_measurement: "C"
+
+  - platform: mqtt
+    state_topic: "outside/humidity-sensing-front-door"
+    name: "humidity-front-door"
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "room/humidity-sensing-corner"
+    name: "humidity-yard"
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "room/temperature-sensing-corner"
+    name: "temperature-yard"
+    unit_of_measurement: "C"
+
+  - platform: mqtt
+    state_topic: "room/light-sensing-corner"
+    name: "photon-yard"
+    unit_of_measurement: "dark"

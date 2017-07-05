@@ -1,0 +1,103 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 21.0333
+  longitude: 105.85
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 20
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Asia/Ho_Chi_Minh
+  # celsius
+  temperature_unit: C
+# Show links to resources in log and frontend
+introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Uncomment this to add a password (recommended!)
+  # api_password: PASSWORD
+  # Uncomment this if you are using SSL or running in Docker etc
+  # base_url: example.duckdns.org:8123
+
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+#mosquitto broker
+mqtt:
+  broker: 127.0.0.1
+
+# Weather Prediction
+
+# Text to speech
+tts:
+  platform: google
+
+#adding sensors:
+sensor: !include sensors-conf.yaml
+
+#  platform: mqtt
+
+notify me:
+  platform: pushbullet
+  api_key: o.DZ5u6fNtg8pR1MJG3tAuFqZZGMHq7hMJ
+  name: midroomDark
+
+automation:
+  - alias: FanOn
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.lightmidroom
+      above: 900
+    action:
+      service: notify.midroomDark
+      data_template:
+        title: "Darkness at midroom "
+        message: "too dark, please turn on the light to protect your eye. 
+        Current darkness is {{states.sensor.lightmidroom.state}}"
+
+
+#recorder:
+recorder:
+  db_url: postgresql://postgres:congminh123@localhost:5432/home_assistant
+
+#mqtt event stream
+#mqtt_eventstream:
+#  publish_topic: master/topic
+#  subscribe_topic: slaves/#
+
+group: !include groups.yaml
+#automation: !include automations.yaml
+
+#3/7: adding recorder component and mqtt event stream
+#4/7: adding development requirements...
+#5/7: adding switch: room/fan-corner, room/desk-lamp-corner, room/desk-lamp-midroom, room/fan-midroom

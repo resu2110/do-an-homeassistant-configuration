@@ -1,0 +1,23 @@
+2017-07-05 12:36:05 ERROR (MainThread) [homeassistant.core] Error doing job: Task exception was never retrieved
+Traceback (most recent call last):
+  File "/usr/lib/python3.5/asyncio/tasks.py", line 241, in _step
+    result = coro.throw(exc)
+  File "/srv/homeassistant/lib/python3.5/site-packages/homeassistant/components/discovery.py", line 119, in scan_devices
+    results = yield from hass.async_add_job(_discover, netdisco)
+  File "/usr/lib/python3.5/asyncio/futures.py", line 361, in __iter__
+    yield self  # This tells Task to wait for completion.
+  File "/usr/lib/python3.5/asyncio/tasks.py", line 296, in _wakeup
+    future.result()
+  File "/usr/lib/python3.5/asyncio/futures.py", line 274, in result
+    raise self._exception
+  File "/usr/lib/python3.5/concurrent/futures/thread.py", line 55, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/srv/homeassistant/lib/python3.5/site-packages/homeassistant/components/discovery.py", line 145, in _discover
+    netdisco.scan()
+  File "/home/homeassistant/.homeassistant/deps/netdisco/discovery.py", line 66, in scan
+    self.tellstick.scan()
+  File "/home/homeassistant/.homeassistant/deps/netdisco/tellstick.py", line 21, in scan
+    self.update()
+  File "/home/homeassistant/.homeassistant/deps/netdisco/tellstick.py", line 36, in update
+    sock.sendto(DISCOVERY_PAYLOAD, (DISCOVERY_ADDRESS, DISCOVERY_PORT))
+OSError: [Errno 101] Network is unreachable
