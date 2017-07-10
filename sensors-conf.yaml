@@ -5,7 +5,7 @@
   - platform: mqtt
     state_topic: "room/temperature-sensing-mid-room"
     name: "temperature-mid-room"
-    unit_of_measurement: "C"
+    unit_of_measurement: "°C"
 
   - platform: mqtt
     state_topic: "room/humidity-sensing-mid-room"
@@ -20,7 +20,7 @@
   - platform: mqtt
     state_topic: "outside/temperature-sensing-front-door"
     name: "temperature-front-door"
-    unit_of_measurement: "C"
+    unit_of_measurement: "°C"
 
   - platform: mqtt
     state_topic: "outside/humidity-sensing-front-door"
@@ -29,15 +29,29 @@
 
   - platform: mqtt
     state_topic: "room/humidity-sensing-corner"
-    name: "humidity-yard"
+    name: "humidity-corner"
     unit_of_measurement: "%"
 
   - platform: mqtt
     state_topic: "room/temperature-sensing-corner"
-    name: "temperature-yard"
-    unit_of_measurement: "C"
+    name: "temperature-corner"
+    unit_of_measurement: "°C"
 
   - platform: mqtt
     state_topic: "room/light-sensing-corner"
-    name: "photon-yard"
+    name: "photon-corner"
     unit_of_measurement: "dark"
+  
+  - platform: template
+    sensors:
+      front_door_mid_room_compare:
+        value_template: '{{states.sensor.temperaturefrontdoor.state|float - states.sensor.temperaturemidroom.state|float }}'
+        friendly_name: 'Temperature Inside Outside Differs'
+        unit_of_measurement: "°C"
+
+  - platform: template
+    sensors:
+      front_door_corner_compare:
+        value_template: '{{states.sensor.temperaturefrontdoor.state|float - states.sensor.temperaturecorner.state|float }}'
+        friendly_name: 'Temperature Corner-Midroom Differs'
+        unit_of_measurement: "°C"

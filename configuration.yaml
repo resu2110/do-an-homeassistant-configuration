@@ -67,25 +67,36 @@ sensor: !include sensors-conf.yaml
 
 #  platform: mqtt
 
-notify me:
-  platform: pushbullet
-  api_key: o.DZ5u6fNtg8pR1MJG3tAuFqZZGMHq7hMJ
-  name: midroomDark
+notify 1:  
+  platform: pushover
+  api_key: ajy4ozeb91avrcj7iddcs6iq1rshcp
+  user_key: u2qdf215yaqz4zo2ky9f3uy7x2r5ti
+  name: mypushover
 
-automation:
-  - alias: FanOn
-    trigger:
-      platform: numeric_state
-      entity_id: sensor.lightmidroom
-      above: 900
-    action:
-      service: notify.midroomDark
-      data_template:
-        title: "Darkness at midroom "
-        message: "too dark, please turn on the light to protect your eye. 
-        Current darkness is {{states.sensor.lightmidroom.state}}"
+switch: !include switchs-conf.yaml
+
+switch 1:
+  - platform: mqtt
+    command_topic: "room/toogle-automatic"
+    state_topic: "room/toogle-automatic"
+    optimistic: false
+    payload_on: "1"
+    payload_off: "0"
+    retain: false
+    name: "Toogle automation"
 
 
+
+#hint
+#   
+#- platform: template
+#    sensors:
+#        inside_outside_compare:
+#            value_template: '{{(states.sensor.dark_sky_temperature.state|float - 
+#states.sensor.broadlink_sensor_temperature.state|float)|round(1)}}'
+#            friendly_name: 'Temp Difference'
+#            unit_of_measurement: '°F'
+#using this to calculate 
 #recorder:
 recorder:
   db_url: postgresql://postgres:congminh123@localhost:5432/home_assistant
@@ -96,7 +107,10 @@ recorder:
 #  subscribe_topic: slaves/#
 
 group: !include groups.yaml
-#automation: !include automations.yaml
+automation: !include automations-conf.yaml
+
+#switch:
+
 
 #3/7: adding recorder component and mqtt event stream
 #4/7: adding development requirements...

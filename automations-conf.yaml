@@ -1,0 +1,45 @@
+ 
+        
+  - alias: heat_warning_front_door_mid_room
+    trigger: 
+      platform: numeric_state
+      entity_id: sensor.front_door_mid_room_compare
+      above: 8
+    action:
+      service: notify.mypushover
+      data:
+        title: "Heat shock warning"
+        message: "Outside temperature is 8°C greater than midroom temperature which may hurts your feeling :)"
+
+  - alias: heat_warning_front_door_corner
+    trigger: 
+      platform: numeric_state
+      entity_id: sensor.front_door_corner_compare
+      above: 8
+    action:
+      service: notify.mypushover
+      data:
+        title: "Heat shock warning"
+        message: "Outside temperature is 8°C greater than corner temperature which may hurts your feeling :)"
+
+  - alias: dark_warning_midroom
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.lightmidroom
+      above: 900
+    action:
+      service: notify.mypushover
+      data:
+        title: "Darkness at midroom"
+        message: "Too dark at midroom.If you are reading books, please turn on the light to protect your eye."
+
+  - alias: dark_warning_corner
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.lightcorner
+      above: 900
+    action:
+      service: notify.mypushover
+      data:
+        title: "Darkness at corner"
+        message: "Too dark at corner.If you are reading books, please turn on the light to protect your eye."        

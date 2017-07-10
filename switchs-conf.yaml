@@ -1,0 +1,32 @@
+  - platform: mqtt
+    name: desk-lamp-mid-room
+    command_topic: room/desk-lamp-mid-room-control
+    state_topic: room/desk-lamp-mid-room-state
+    optimistic: false
+    retain: false
+
+
+  - platform: mqtt
+    name: desk-lamp-corner
+    command_topic: room/desk-lamp-corner-control        
+    optimistic: false
+    retain: false
+    state_topic: room/desk-lamp-corner-state        
+    payload_on: '1'
+    payload_off: '0'
+
+  - platform: mqtt
+    name: mist-generator-midroom
+    command_topic: room/mist-generator-midroom-control    
+    optimistic: false
+    retain: false
+    state_topic: room/mist-generator-midroom-state
+
+  - platform: mqtt
+    name: mist-generator-corner
+    command_topic: room/mist-generator-corner-control    
+    optimistic: false
+    retain: false
+    state_topic: room/mist-generator-corner-state    
+    payload_on: '1'
+    payload_off: '0'
